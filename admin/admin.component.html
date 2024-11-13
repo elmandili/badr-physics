@@ -1,0 +1,72 @@
+
+<div class="centered-container" *ngIf="!level_selected">
+        
+    <h1>Choose A Level To Edit </h1>
+    
+    <button (click)="SetField('PBAC')" >1 Bac</button>
+    <button (click)="SetField('DBAC')">2 Bac</button>
+    <button (click)="SetField('TC')">TC</button>
+    
+    
+</div>
+
+<div class="container" *ngIf="level_selected">
+    <div class="row">
+        <div class="col-6" *ngFor="let item of data" >
+            <div class="row">
+                <div class="content">
+                    <div class="index">
+                        {{data.indexOf(item)}}
+                    </div>
+                    
+                    <textarea 
+                    [value]="item.text" 
+                    [(ngModel)]="item.text"
+                    [disabled]="!item.is_editable" 
+                    rows="4" 
+                    cols="50">
+                    </textarea>
+                </div>
+            </div>
+            <div class="row">
+                <span class="col-2"></span>
+                <div class="col-3" *ngIf="!item.is_editable && !is_editing" >
+                    <button style="width: 100%;" class="button-soft button-green" (click)="Edit(item)">edit</button>
+                </div>  
+
+                <div class="col-3" *ngIf="!item.is_editable && is_editing" >
+                    <button style="width: 100%;" class="button-soft button-green" disabled>edit</button>
+                </div>
+                
+                <div class="col-3" *ngIf="item.is_editable && is_editing" >
+                    <button style="width: 100%;" class="button-soft button-green" (click)="Finish(item)">Finish</button>
+                </div>
+                
+                <span class="col-2"></span>
+                <div class="col-3" *ngIf="!item.is_editable && !is_editing">
+                    <button style="width: 100%;" class="col-3 button-soft button-red">delete</button>
+                </div>
+
+                <div class="col-3" *ngIf="item.is_editable && is_editing">
+                    <button style="width: 100%;" class="col-3 button-soft button-red" (click)="Cancel(item)">cancel</button>
+                </div>
+
+                <span class="col-2"></span>
+            </div>
+            
+        </div>
+
+        <div class="col-6 content plus_container">
+            <button class="button-soft button-green" (click)="Plus({text: '', is_editable: true, index: data.length})">+</button>    
+        </div>
+        
+    </div>
+        
+    
+
+    
+    
+    
+</div>
+
+

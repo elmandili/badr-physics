@@ -1,0 +1,42 @@
+/* Center container styling */
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+  }
+  
+  .center-container p {
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .center-container h1{
+    color: white;
+  }
+  
+  .center-container input {
+    margin-top: 5px;
+    text-align: center; /* Center the placeholder text */
+  }
+  /* Add margin to the specific div containing displayed_data */
+.center-container div:last-child {
+    margin-top: 40px; /* Adjust the value as needed */
+  }
+
+.displayed
+{
+  opacity: 1;
+
+  transition: 0.5s;
+}
+
+.hidden{
+  opacity: 0;
+
+  transition: 0.5s;
+}
+  
+  

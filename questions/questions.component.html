@@ -1,0 +1,16 @@
+<div class="center-container">
+    <h1>{{field}}</h1>
+    
+    <div>
+      <h1>Enter a Number from 1 to {{this.data.length}} </h1>
+      <input type="number" id="numberInput" (change)="OnValueChange()" [(ngModel)]="index" class="form-control" placeholder="Enter a number"/>
+ <br>
+      <button style="background-color: #555;" (click)="DisplayQuestion()" class="btn btn-primary btn-lg mt-3">Display The Question</button>
+
+    </div>
+    
+    <div [ngClass]="{ 'displayed': display, 'hidden': !display }" >
+      <p>The Question is : {{displayed_data}}</p>
+    </div>
+  </div>
+  
