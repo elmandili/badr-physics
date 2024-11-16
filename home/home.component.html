@@ -1,13 +1,38 @@
 
     
     <!-- home.component.html -->
-    <div class="centered-container" *ngIf="level_selected">
+    <div class="centered-container" *ngIf="!level_selected && !branch_selected && !course_selected">
         
         <h1 class="text-color">Level</h1>
         <p class="text-color">Be Ready for badr Questions</p>
-        <button [routerLink]="['/questions', 'PBAC']">1 Bac</button>
-        <button [routerLink]="['/questions', 'DBAC']">2 Bac</button>
-        <button [routerLink]="['/questions', 'TC']">TC</button>
+        <button class="button" (click)="SelectLevel('PBAC')">1 Bac</button>
+        <button class="button" (click)="SelectLevel('DBAC')">2 Bac</button>
+        <button class="button" (click)="SelectLevel('TC')">TC</button>
+        
+        
+    </div>
+
+    <div class="centered-container" *ngIf="level_selected && !branch_selected && !course_selected">
+        
+        <h1 class="text-color">Branch</h1>
+        <p class="text-color">Be Ready for badr Questions</p>
+        <button class="button" (click)="SelectBranch('physics')">Physics</button>
+        <button class="button" (click)="SelectBranch('chemistery')">Chemistery</button>
+        
+        
+        
+    </div>
+
+    <div class="centered-container" *ngIf="level_selected && branch_selected && !course_selected">
+        <h1 class="text-color">Course</h1>
+        <p class="text-color">Be Ready for badr Questions</p>
+        <div style="width: 100%;" *ngFor="let course of jsonData[api_data.level][api_data.branch] | keyvalue" >
+            <button class="button" [routerLink]="['/questions', api_data.level, api_data.branch, course.key]"> {{course.key}} </button>
+        </div>
+        
+        
+        
+        
         
         
     </div>

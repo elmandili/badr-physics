@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
-import data from '../../assets/data.json'
+import data from '../../../data.json'
 
 
 @Component({
@@ -17,36 +17,46 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
       
       this.jsonData = data;
-      let test: number[] = [1, 2, 3]
-      this.http.get('http://localhost:3000/api/write/'+{name:"my name"});
-      this.http.get('http://localhost:3000/api/add-course/TC/' + JSON.stringify(test)).subscribe();
+      console.log(this.jsonData["TC"]);
+      
   }
 
   jsonData: any;
   choosed_data: any;
 
+  api_data: {level:string, branch:string,course: string} = {'level':'','branch':'','course':''};
+
   
   
   
 
 
 
-  level_selected: boolean = true;
+  level_selected: boolean = false;
+  branch_selected: boolean = false;
+  course_selected: boolean = false;
   max_number: number  = 0;
   choosed_number: number = 0;
   choosedQuestion: string = "";
   
 
   
-  SelectLevel(choosed_level: any)
-  {
-    this.http.get('http://localhost:3000/api/greet').subscribe((x:any)=>{
-      console.log(x);
-    })
-    this.level_selected = false;
-    console.log(choosed_level);
-    this.max_number = choosed_level.length;
-    this.choosed_data = choosed_level;
-    
+  
+  
+  
+
+  SelectLevel(x:string){
+    this.level_selected = true;
+    this.api_data.level = x;
+  }
+
+  SelectBranch(x:string){
+    this.branch_selected = true;
+    this.api_data.branch = x;
+  }
+
+  SelectCourse(x:string){
+    this.course_selected = true;
+    this.api_data.course = x;
   }
 }

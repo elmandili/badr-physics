@@ -38,5 +38,35 @@
 
   transition: 0.5s;
 }
+
+.input{
+  border-radius: 10px;
+  width: 100%;
+  transition: 0.5s;
+  
+}
+
+.input:focus{
+  border-radius: 25px;
+  width: 80%;
+  margin: 0 auto;
+  transition: 0.5s;
+}
+
+.display-student-area{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  
+}
+
+.display-student-area h1 {
+  padding: 10px;
+}
+
+.input-container{
+  width: 60%;
+}
+
+
   
   

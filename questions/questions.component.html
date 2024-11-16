@@ -1,16 +1,32 @@
-<div class="center-container">
-    <h1>{{field}}</h1>
-    
-    <div>
-      <h1>Enter a Number from 1 to {{this.data.length}} </h1>
-      <input type="number" id="numberInput" (change)="OnValueChange()" [(ngModel)]="index" class="form-control" placeholder="Enter a number"/>
- <br>
-      <button style="background-color: #555;" (click)="DisplayQuestion()" class="btn btn-primary btn-lg mt-3">Display The Question</button>
 
-    </div>
+<div class="center-container">
+  <h3 style="color: white;">number of student</h3>
+  <div class="input-container">
+    <input [(ngModel)]="number_of_students" style="margin: 0 auto;" type="number" placeholder="number of students" class="form-control input"><br>
     
+  </div>
+  <button style="width: 20%;" class="button-soft button-red" (click)="Shuffle()">Shuffle</button>
+  <div class="display-student-area">
+    <h1>Student Number: {{choosed_student}} </h1>
+  </div>
+  
+</div>
+
+<div class="center-container">
+    
+    <h1>Enter a Number from 1 to {{this.data.length}} </h1>
+    <div class="input-container">
+      
+      <div>
+        <input style="margin: 0 auto;" type="number" id="numberInput" (change)="OnValueChange()" [(ngModel)]="index" class="form-control input" placeholder="Enter a number"/>
+        <br>
+        
+      </div>
+      
+    </div>
+    <button style="width: 20%;" (click)="DisplayQuestion()" class="button-soft button-red">Display The Question</button>
     <div [ngClass]="{ 'displayed': display, 'hidden': !display }" >
       <p>The Question is : {{displayed_data}}</p>
     </div>
-  </div>
+</div>
   
