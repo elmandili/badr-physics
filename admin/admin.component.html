@@ -3,14 +3,37 @@
         
     <h1>Choose A Level To Edit </h1>
     
-    <button (click)="SetField('PBAC')" >1 Bac</button>
-    <button (click)="SetField('DBAC')">2 Bac</button>
-    <button (click)="SetField('TC')">TC</button>
+    <button class="button" (click)="SetField('PBAC')" >1 Bac</button>
+    <button class="button" (click)="SetField('DBAC')">2 Bac</button>
+    <button class="button" (click)="SetField('TC')">TC</button>
     
     
 </div>
 
-<div class="container" *ngIf="level_selected">
+<div class="centered-container" *ngIf="!branch_selected && level_selected">
+        
+    <h1>Choose A Level To Edit </h1>
+    
+    <button class="button" (click)="SetBranch('physics')" >Physics</button>
+    <button class="button" (click)="SetBranch('chemistery')">Chemistery</button>
+    
+    
+    
+</div>
+
+<div class="centered-container" *ngIf="!course_selected && branch_selected && level_selected">
+
+        
+    <div style="width: 100%;" *ngFor="let c of courses | keyvalue">
+            <button class="button" > {{c.key}} </button>
+    </div>
+    
+    <button class="button" > + </button>
+    <input style="width: 50%; height: 50px;" [(ngModel)]="course_to_add" (keyup.enter)="OnAddCourse()" class="input" type="text" name="" id="">
+    
+</div>
+
+<div class="container" *ngIf="level_selected && branch_selected && course_selected">
     <div class="row">
         <div class="col-6" *ngFor="let item of data" >
             <div class="row">

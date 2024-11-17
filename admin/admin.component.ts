@@ -27,6 +27,12 @@ export class AdminComponent implements OnInit {
   field: string = '';
   level_selected: boolean = false;
   is_editing: boolean = false;
+  branch_selected: boolean = false;
+  branch: string = '';
+  course_selected: boolean = false;
+  course: string = '';
+  courses: string[] = [];
+  course_to_add: string = '';
   
 
   SetField(s: string)
@@ -34,13 +40,34 @@ export class AdminComponent implements OnInit {
     this.field = s;
     this.level_selected = true;
 
-    this.GetData();
+    //this.GetData();
+  }
+
+
+  SetBranch(s: string){
+    this.branch = s;
+    this.branch_selected = true;
+    this.GetCourses();
+  }
+
+  GetCourses(){
+    this.http.get('http://localhost:3000/api/get-courses/' + this.field +'/' + this.branch).subscribe((x:any)=>{
+      this.courses = x;
+      console.log(this.courses);
+    })
+  }
+
+  SetCourse(s: string){
+    this.course = s;
+    this.course_selected = true;
   }
 
   GetData()
   {
     this.http.get('http://localhost:3000/api/get/' + this.field).subscribe((x:any)=>{
-      this.data = x;
+      this.courses = x;
+      
+      console.log(this.courses);
       console.log(x);
       this.data = this.data.map((text:any) => ({
         text,  // Spread the existing properties
@@ -88,6 +115,13 @@ export class AdminComponent implements OnInit {
       this.GetData();
     });
     
+  }
+
+  OnAddCourse(){
+    console.log("course added");
+    this.http.get('http://localhost:3000/api/add-course/' + this.field + '/' + this.branch + '/' + this.course_to_add).subscribe(x =>{
+      this.GetCourses();
+    });
   }
 
   

@@ -20,6 +20,7 @@ body
   .centered-container h1 {
     margin-bottom: 10px;
     font-size: 2rem;
+    color: white;
   }
   
   .centered-container p {
@@ -27,17 +28,7 @@ body
     font-size: 1.2rem;
   }
   
-  .centered-container button {
-    width: 50%;
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+  
   
   .centered-container button:hover {
     background-color: #555;
@@ -66,6 +57,20 @@ body
     justify-content: center; 
     align-items: center; 
     text-align: center;
+}
+
+
+.button {
+  width: 50%;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #8E4585;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 25px;
 }
 
 
