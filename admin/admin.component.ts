@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { item } from './item.model';
 
 
+
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -33,6 +34,10 @@ export class AdminComponent implements OnInit {
   course: string = '';
   courses: string[] = [];
   course_to_add: string = '';
+  course_to_edit: string = '';
+  courses_disabled: boolean[] = [];
+  courses_models:any;
+  editing_courses: boolean = false;
   
 
   SetField(s: string)
@@ -54,6 +59,9 @@ export class AdminComponent implements OnInit {
     this.http.get('http://localhost:3000/api/get-courses/' + this.field +'/' + this.branch).subscribe((x:any)=>{
       this.courses = x;
       console.log(this.courses);
+      this.courses_disabled = Object.keys(this.courses).map(() => true);
+      this.courses_models = Object.keys(this.courses).filter((key:any) => Array.isArray(this.courses[key]));
+      console.log(this.courses_models);
     })
   }
 
@@ -69,12 +77,9 @@ export class AdminComponent implements OnInit {
       
       console.log(this.courses);
       console.log(x);
-      this.data = this.data.map((text:any) => ({
-        text,  // Spread the existing properties
-        isEditable: false,
-        index: x.indexOf(text)// Add the new property with a default value
-      }));
-      console.log(this.data);
+
+      this.courses_models = this.courses;
+      
     })
   }
 
@@ -124,8 +129,32 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  
+  ToggleEditCourse(index:number){
+    this.courses_disabled[index] = !this.courses_disabled[index];
+    this.editing_courses = !this.editing_courses;
+  }
 
+  FinishUpdatingCourse(index: number){
+    let courses = Object.keys(this.courses).filter((key:any) => Array.isArray(this.courses[key]));
+    if(courses[index] != this.courses_models[index]){
+        this.http.get('http://localhost:3000/api/edit-course/'+ this.field +'/'+ this.branch +'/' + courses[index] + '/' + this.courses_models[index]).subscribe(x =>{
+        this.GetCourses();
+        });
+    }
+    
+  }
+
+
+  DeleteCourse(index: number){
+    console.log('delete course is clicked');
+    console.log(index);
+    let courses = Object.keys(this.courses).filter((key:any) => Array.isArray(this.courses[key]));
+    console.log(courses);
+
+    this.http.get('http://localhost:3000/api/remove-course/' + this.field + '/' + this.branch + '/'+ courses[index]).subscribe((x:any)=>{
+      this.GetCourses();
+    });
+  }
   
   
   
