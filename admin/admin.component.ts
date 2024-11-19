@@ -4,6 +4,7 @@ import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { item } from './item.model';
+import { ApiService } from '../api_service/api.service';
 
 
 
@@ -11,6 +12,7 @@ import { item } from './item.model';
   selector: 'app-admin',
   standalone: true,
   imports: [CommonModule, HttpClientModule, RouterModule, FormsModule],
+  
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -19,7 +21,13 @@ import { item } from './item.model';
 
 
 export class AdminComponent implements OnInit {
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private api_service: ApiService){
+    this.api_service.GetJsonData().subscribe(()=>{
+      console.log(this.api_service.json_data);
+    })
+    
+    
+  }
   data:any;
   ngOnInit(): void {
     
@@ -38,6 +46,13 @@ export class AdminComponent implements OnInit {
   courses_disabled: boolean[] = [];
   courses_models:any;
   editing_courses: boolean = false;
+
+  api_data = {
+    level: '',
+    branch: '',
+    course: '',
+    question: ''
+  }
   
 
   SetField(s: string)
@@ -151,9 +166,11 @@ export class AdminComponent implements OnInit {
     let courses = Object.keys(this.courses).filter((key:any) => Array.isArray(this.courses[key]));
     console.log(courses);
 
-    this.http.get('http://localhost:3000/api/remove-course/' + this.field + '/' + this.branch + '/'+ courses[index]).subscribe((x:any)=>{
-      this.GetCourses();
+    this.http.delete('http://localhost:3000/api/remove-course/' + this.field + '/' + this.branch + '/'+ courses[index]).subscribe((x:any)=>{
+      
     });
+
+    this.GetCourses();
   }
   
   

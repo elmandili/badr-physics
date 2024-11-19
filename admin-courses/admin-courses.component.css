@@ -1,0 +1,33 @@
+.input-custom{
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 100%;
+    background-color: #8E4585;
+    color: white;
+    border: none;
+    height: 50px;
+    transition: 0.5s;
+
+}
+
+.input-custom:focus{
+    border-radius: 25px;
+    width: 80%;
+    margin: 20px auto;
+    border: none;
+    transition: 0.5s;
+}
+
+.content{
+    display: flex;
+}
+
+
+.button-custom{
+    border-radius: 25px;
+    width: 100px;
+    height: 50px;
+    margin: 20px 10px;
+    border: none;
+    
+}

@@ -1,0 +1,11 @@
+<h1>Level</h1>
+<div *ngIf="!level_selected">
+    <button class="button" (click)="SetLevel('TC')">Tronc commun</button>
+    <button class="button" (click)="SetLevel('PBAC')">Premier Bac</button>
+    <button class="button" (click)="SetLevel('DBAC')">Deuxiem Bac</button>
+</div>
+
+<div *ngIf="level_selected">
+    <button class="button" (click)="SetBranch('physics')">Physics</button>
+    <button class="button" (click)="SetBranch('chemistery')">Chemistery</button>
+</div>

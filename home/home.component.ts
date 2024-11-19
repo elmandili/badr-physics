@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
-import data from '../../../data.json'
+import { ApiService } from '../api_service/api.service';
+
 
 
 @Component({
@@ -13,12 +14,13 @@ import data from '../../../data.json'
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient, public api_service: ApiService){
+    
+    
+    
+  }
   ngOnInit(): void {
-      
-      this.jsonData = data;
-      console.log(this.jsonData["TC"]);
-      
+    
   }
 
   jsonData: any;
@@ -38,6 +40,7 @@ export class HomeComponent implements OnInit {
   max_number: number  = 0;
   choosed_number: number = 0;
   choosedQuestion: string = "";
+  course:string[] = [];
   
 
   
@@ -53,10 +56,18 @@ export class HomeComponent implements OnInit {
   SelectBranch(x:string){
     this.branch_selected = true;
     this.api_data.branch = x;
+    this.GetCourses();
   }
 
   SelectCourse(x:string){
     this.course_selected = true;
     this.api_data.course = x;
+  }
+
+  GetCourses(){
+    this.http.get('http://localhost:3000/api/get-courses/' + this.api_data.level +'/' + this.api_data.branch).subscribe((x:any)=>{
+      this.jsonData = x;
+      
+    })
   }
 }

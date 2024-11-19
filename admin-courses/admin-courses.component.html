@@ -1,0 +1,8 @@
+<h1 style="color: white;">Courses Admin</h1>
+<div class="content" *ngFor="let cour of courses | keyvalue; let i = index" >
+    <input class="input-custom" type="text" value="{{cour.key}}" [disabled] = courses_disabled[i]>
+    <button class="button-green button-custom"  >Open</button>
+    <button class="button-green button-custom" *ngIf="courses_disabled[i]"(click)="Edit(i)">edit</button>
+    <button class="button-green button-custom" *ngIf="!courses_disabled[i]" (click)="FinishEditing(i)" >Finish</button>
+    <button class="button-red button-custom">edit</button>
+</div>
